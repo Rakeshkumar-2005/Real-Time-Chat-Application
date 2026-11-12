@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import dbConnect from "./DB/dbConnect.js";
 import authRouter from "./routes/authUser.js";
 import messageRouter from "./routes/message.js"
+import userRouter from "./routes/user.js"
 import cookieParser from "cookie-parser";
 
 import dns from "node:dns";
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use('/api/auth',authRouter);
 app.use('/api/message',messageRouter);
+app.use('/api/user',userRouter);
 
 
 app.get('/',(req,res)=>{
