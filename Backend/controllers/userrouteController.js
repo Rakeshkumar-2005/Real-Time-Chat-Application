@@ -32,7 +32,7 @@ export const userRegister = async(req,res)=>{
     if(newUser){
       //create JWT
       await newUser.save();
-      jwtToken(newUse._id,res);
+      jwtToken(newUser._id,res);
     }
     else{
       res.status(500).send({success:false,message:"Invalid User Data"});
@@ -50,7 +50,7 @@ export const userRegister = async(req,res)=>{
     console.log(error);
     return res.status(500).send({
       success:false,
-      message:message.error
+      message:error.message
     });
   }
 }
@@ -64,9 +64,9 @@ export const userLogin = async(req,res)=>{
 
     if(!user) return res.status(500).send({success:false,message:"Email Doesn't Exist Register"});
 
-    const camparePass = bcryptjs.compareSync(password,user.password || "");
+    const comparePass = bcryptjs.compareSync(password,user.password || "");
 
-    if(!camparePass) return res.status(500).send({success:false,message:"Email or password Doesn't matching"});
+    if(!comparePass) return res.status(500).send({success:false,message:"Email or password Doesn't matching"});
 
     jwtToken(user._id,res);
     
